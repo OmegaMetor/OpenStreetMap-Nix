@@ -181,7 +181,7 @@ let
           ''
             ln -s ${lib.escapeShellArg value} "$out/config/${name}"
           ''
-        else if builtins.isAttrs value then
+        else if builtins.isAttrs value || builtins.isList value then
           let
             generated = yaml.generate name value;
           in
@@ -191,7 +191,7 @@ let
         else
           throw ''
             openstreetmap-website.withConfigs: invalid value for ${name}.
-            Expected a path, string path, attribute set, or null.
+            Expected a path, string path, attribute set, list, or null.
           '';
     in
     stdenv.mkDerivation {
