@@ -16,6 +16,19 @@ let
       GD2_LIBRARY_FULL_PATH=${lib.getLib pkgs.gd}/lib/libgd.so
     '';
   };
+  path = with pkgs; [
+    git
+    postgresql
+    pngcrush
+    advancecomp
+    optipng
+    pngquant
+    jhead
+    jpegoptim
+    libjpeg
+    gifsicle
+    svgo
+  ];
 in
 {
   options.services.openstreetmap.website = {
@@ -77,10 +90,7 @@ in
       after = [ "openstreetmap-website-init-db.service" ];
       requires = [ "openstreetmap-website-init-db.service" ];
       
-      path = [
-        pkgs.git
-        pkgs.postgresql
-      ];
+      path = path;
 
       serviceConfig = {
         User = cfg.user;
@@ -117,10 +127,7 @@ in
         WorkingDirectory = cfg.package;
       };
 
-      path = [
-        pkgs.git
-        pkgs.postgresql
-      ];
+      path = path;
 
       script = ''
         umask 077

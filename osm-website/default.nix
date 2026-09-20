@@ -17,7 +17,16 @@
   git,
   openssl,
   fetchurl,
-  autoPatchelfHook
+  autoPatchelfHook,
+  pngcrush,
+  advancecomp, 
+  optipng, 
+  pngquant,
+  jhead, 
+  jpegoptim, 
+  libjpeg, 
+  gifsicle,
+  svgo,
 }:
 
 let
@@ -201,7 +210,21 @@ let
 
       dontBuild = true;
 
-      nativeBuildInputs = [git gems];
+      nativeBuildInputs = [
+        git
+        gems
+
+        pngcrush
+        advancecomp
+        optipng
+        pngquant
+        jhead
+        jpegoptim
+        libjpeg
+        gifsicle
+        svgo
+  
+        ];
 
       SSL_CERT_FILE = "${cacert}/etc/ssl/certs/ca-bundle.crt";
       GD2_LIBRARY_FULL_PATH="${lib.getLib gd}/lib/libgd.so";
